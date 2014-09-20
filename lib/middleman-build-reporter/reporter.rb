@@ -6,7 +6,7 @@ module Middleman
       def initialize(app_instance)
         @app = app_instance
 
-        @repo = Git.open(@app.root)
+        @app.set :repo, Git.open(@app.repo_root)
       end
 
       def write
@@ -15,14 +15,19 @@ module Middleman
 
       def details
         [
-          "branch: #{@repo.current_branch}",
-          "revision: #{@repo.log.first.to_s}",
-          "build_time: #{build_time.to_s}"
+          "branch: #{repo.current_branch}",
+          "revision: #{repo.log.first.to_s}",
+          "build_time: #{build_time.to_s}",
+          "version: #{@app.version}"
         ].join("\n")
       end
 
       def build_time
         @build_time ||= Time.now
+      end
+
+      def repo
+        @app.repo
       end
     end
   end
