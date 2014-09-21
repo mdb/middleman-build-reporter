@@ -3,6 +3,8 @@ require 'git'
 module Middleman
   module BuildReporter
     class Reporter
+      attr_accessor :app
+
       def initialize(app_instance)
         @app = app_instance
 
@@ -10,7 +12,11 @@ module Middleman
       end
 
       def write
-        File.write("#{@app.build_dir}/build", details)
+        File.write(report_file, details)
+      end
+
+      def report_file
+        "#{@app.build_dir}/build"
       end
 
       def details
