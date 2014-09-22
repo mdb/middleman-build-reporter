@@ -47,6 +47,19 @@ describe Middleman::BuildReporterExtension do
         expect(reporter_file.description).to eq 'build report file name'
       end
     end
+
+    context 'its default reporter file formats' do
+
+      let(:reporter_file_formats) { settings[:reporter_file_formats] }
+
+      it 'they are json and yaml' do
+        expect(reporter_file_formats.default).to eq ['yaml']
+      end
+
+      it 'has the correct description' do
+        expect(reporter_file_formats.description).to eq 'an array of build report file formats'
+      end
+    end
   end
 
   describe '#build_report' do

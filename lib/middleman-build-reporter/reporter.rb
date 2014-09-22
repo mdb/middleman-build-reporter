@@ -1,4 +1,6 @@
 require 'git'
+require 'json'
+require 'yaml'
 
 module Middleman
   module BuildReporter
@@ -12,7 +14,9 @@ module Middleman
       end
 
       def write
-        File.write(reporter_file_path, details)
+        @app.reporter_file_formats.each do |format|
+          File.write("#{reporter_file_path}.#{format}", serialize(format))
+        end
       end
 
       def reporter_file_path
@@ -20,12 +24,12 @@ module Middleman
       end
 
       def details
-        [
-          "branch: #{repo.current_branch}",
-          "revision: #{repo.log.first.to_s}",
-          "build_time: #{build_time.to_s}",
-          "version: #{@app.version}"
-        ].join("\n")
+        {
+          'branch' => repo.current_branch,
+          'revision' => repo.log.first.to_s,
+          'build_time' => build_time.to_s,
+          'version' => @app.version
+        }
       end
 
       def build_time
@@ -34,6 +38,12 @@ module Middleman
 
       def repo
         @app.repo
+      end
+
+      def serialize(format)
+        method = "to_#{format}".to_sym
+
+        details.send(method)
       end
     end
   end

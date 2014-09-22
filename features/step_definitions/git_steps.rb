@@ -11,7 +11,7 @@ Then /the file "([^"]*)" should report the current git revision/ do |file|
 end
 
 Then /the file "([^"]*)" should report the build time/ do |file|
-  partial_content = "build_time: #{Time.now.strftime('%Y-%m-%d %H:%M')}"
+  partial_content = "build_time: '#{Time.now.strftime('%Y-%m-%d %H:%M')}"
 
   check_file_content(file, partial_content, true)
 end
