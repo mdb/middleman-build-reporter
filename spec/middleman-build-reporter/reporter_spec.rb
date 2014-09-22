@@ -9,6 +9,7 @@ describe Middleman::BuildReporter::Reporter do
   let(:reporter) do
     app.set :repo_root, '.'
     app.set :version, '1.2.3'
+    app.set :reporter_file, 'reporter'
 
     described_class.new app
   end
@@ -28,9 +29,9 @@ describe Middleman::BuildReporter::Reporter do
 
     it 'writes the build details to the proper "build" file' do
       allow(reporter).to receive(:details).and_return 'fake_details'
-      allow(reporter).to receive(:report_file).and_return 'fake_report_file'
+      allow(reporter.app).to receive(:reporter_file).and_return 'fake_report_file'
 
-      allow(File).to receive(:write).with('fake_report_file', 'fake_details').and_return 'fake_write_call'
+      allow(File).to receive(:write).with('build/fake_report_file', 'fake_details').and_return 'fake_write_call'
 
       expect(reporter.write).to eq 'fake_write_call'
     end
@@ -39,7 +40,7 @@ describe Middleman::BuildReporter::Reporter do
   describe '#report_file' do
 
     it 'returns the file path to which the build details should be written' do
-      expect(reporter.report_file).to eq "#{app.build_dir}/build"
+      expect(reporter.report_file).to eq "build/reporter"
     end
   end
 

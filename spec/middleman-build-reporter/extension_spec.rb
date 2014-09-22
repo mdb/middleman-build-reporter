@@ -34,6 +34,19 @@ describe Middleman::BuildReporterExtension do
         expect(version.description).to eq 'app version'
       end
     end
+
+    context 'its default reporter file' do
+
+      let(:reporter_file) { settings[:reporter_file] }
+
+      it 'is "build"' do
+        expect(reporter_file.default).to eq 'build'
+      end
+
+      it 'has the correct description' do
+        expect(reporter_file.description).to eq 'build report file name'
+      end
+    end
   end
 
   describe '#build_report' do

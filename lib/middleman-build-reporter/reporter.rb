@@ -16,7 +16,7 @@ module Middleman
       end
 
       def report_file
-        "#{@app.build_dir}/build"
+        "#{@app.build_dir}/#{@app.reporter_file}"
       end
 
       def details
