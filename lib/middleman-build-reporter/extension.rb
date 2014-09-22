@@ -1,19 +1,23 @@
 module Middleman
   class BuildReporterExtension < Extension
-    option :repo_root, nil, 'app root'
+    option :repo_root, nil, 'repo root'
     option :version, '', 'app version'
 
     def initialize(app, options_hash = {}, &block)
       super
 
-      app.set :repo_root, (options.repo_root ? options.repo_root : app.root)
-      app.set :version, options.version
+      @app = app
+
+      @app.set :repo_root, (options.repo_root ? options.repo_root : app.root)
+      @app.set :version, options.version
     end
 
-    def after_build(builder)
-      report = Middleman::BuildReporter::Reporter.new(@app)
+    def after_build
+      build_report.write
+    end
 
-      report.write
+    def build_report
+      @report ||= Middleman::BuildReporter::Reporter.new(@app)
     end
   end
 end
