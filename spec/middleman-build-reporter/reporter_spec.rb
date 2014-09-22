@@ -37,10 +37,10 @@ describe Middleman::BuildReporter::Reporter do
     end
   end
 
-  describe '#report_file' do
+  describe '#reporter_file_path' do
 
     it 'returns the file path to which the build details should be written' do
-      expect(reporter.report_file).to eq "build/reporter"
+      expect(reporter.reporter_file_path).to eq "build/reporter"
     end
   end
 

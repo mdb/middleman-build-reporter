@@ -12,10 +12,10 @@ module Middleman
       end
 
       def write
-        File.write(report_file, details)
+        File.write(reporter_file_path, details)
       end
 
-      def report_file
+      def reporter_file_path
         "#{@app.build_dir}/#{@app.reporter_file}"
       end
 
