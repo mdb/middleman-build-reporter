@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.authors       = ["Mike Ball"]
   s.email         = ["mikedball@gmail.com"]
-  s.homepage      = "https://github.com/mdb/build-reporter"
+  s.homepage      = "https://github.com/mdb/middleman-build-reporter"
   s.summary       = %q{Report build time git details within your Middleman build}
   s.description   = %q{Report build time git details within your Middleman build}
 
@@ -27,4 +27,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'cucumber'
   s.add_development_dependency 'aruba'
   s.add_development_dependency 'fivemat'
+  s.add_development_dependency 'pry'
 end
