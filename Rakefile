@@ -7,6 +7,6 @@ Cucumber::Rake::Task.new(:cucumber, 'Run features that should pass') do |t|
   t.cucumber_opts = "--color --tags ~@wip --strict --format #{ENV['CUCUMBER_FORMAT'] || 'Fivemat'}"
 end
 
-task :test => ['cucumber']
+RSpec::Core::RakeTask.new
 
-task :default => :test
+task :default => [:spec, :cucumber]
