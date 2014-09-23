@@ -40,10 +40,16 @@ Install it:
 $ bundle install
 ```
 
-And configure it for basic usage within your `config.rb`:
+And activate it for basic usage within your `config.rb`:
+
+```
+activate :build_reporter
+```
+
+Supported configuration:
 
 ```ruby
-activate :middleman_build_reporter do
+activate :build_reporter do
   # optional; the path to your project repository root
   # this must be absolute or relative from your build directory
   # defaults to app root
