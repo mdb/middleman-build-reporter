@@ -1,3 +1,4 @@
 ---
 some_key: 'some value'
 another_key: 'another value'
+version: '3.3.3'
