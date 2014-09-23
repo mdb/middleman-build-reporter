@@ -16,8 +16,10 @@ module Middleman
       @app.set :reporter_file_formats, options.reporter_file_formats
     end
 
-    def after_build
-      build_report.write
+    def after_build(builder)
+      build_report.write do |file|
+        builder.say_status :create, file, :green
+      end
     end
 
     def build_report

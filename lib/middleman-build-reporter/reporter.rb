@@ -15,7 +15,11 @@ module Middleman
 
       def write
         @app.reporter_file_formats.each do |format|
-          File.write("#{reporter_file_path}.#{format}", serialize(format))
+          file = "#{reporter_file_path}.#{format}"
+
+          File.write(file, serialize(format))
+
+          yield(file) if block_given?
         end
       end
 

@@ -71,10 +71,12 @@ describe Middleman::BuildReporterExtension do
 
   describe '#after_build' do
 
+    let(:builder) { double('builder', say_status: 'fake status') }
+
     it 'writes the build report to a file' do
       allow(extension.build_report).to receive(:write).and_return 'fake_write_result'
 
-      expect(extension.after_build).to eq 'fake_write_result'
+      expect(extension.after_build(builder)).to eq 'fake_write_result'
     end
   end
 end
