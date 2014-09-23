@@ -51,7 +51,7 @@ activate :build_reporter
 Supported configuration
 
 ```ruby
-activate :build_reporter do
+activate :build_reporter do |build|
   # optional; the path to your project repository root
   # this must be absolute or relative from your build directory
   # defaults to app root
