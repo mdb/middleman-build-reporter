@@ -1,6 +1,6 @@
 # middleman-build-reporter
 
-Fingerprint your Middleman build with YAML and/or JSON files reporting build-time details.
+Fingerprint your [Middleman](http://middlemanapp.com) build with YAML and/or JSON files reporting build-time details.
 
 middleman-build-reporter helps you understand what code has been deployed to an environment.
 
