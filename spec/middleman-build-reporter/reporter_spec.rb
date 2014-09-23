@@ -47,6 +47,13 @@ describe Middleman::BuildReporter::Reporter do
     end
   end
 
+  describe '#reporter_extension_path' do
+
+    it 'returns the file path to ".build_reporter.yml" file' do
+      expect(reporter.reporter_extension_file_path).to eq "#{app.root}/.build_reporter.yml"
+    end
+  end
+
   describe '#details' do
 
     before do
@@ -75,6 +82,55 @@ describe Middleman::BuildReporter::Reporter do
 
       it 'reports the app version' do
         expect(details['version']).to eq "#{app.version}"
+      end
+
+      context 'when there is a custom details extension' do
+        before do
+          allow(reporter).to receive(:details_extension).and_return 'foo' => 'bar'
+        end
+
+        it 'includes the additional details in the hash it returns' do
+          expect(details['foo']).to eq 'bar'
+        end
+      end
+    end
+  end
+
+  describe '#details_extension' do
+
+    context 'when there is no ".build_reporter.yml" file in the root of the project' do
+
+      it 'returns an empty hash' do
+        expect(reporter.details_extension).to eq({})
+      end
+    end
+
+    context 'when there is a ".build_reporter.yml" file in the root of the project' do
+
+      it 'returns a hash representation of its YAML' do
+        allow(reporter).to receive(:details_extension_exist?).and_return true
+        allow(File).to receive(:read).with("#{app.root}/.build_reporter.yml").and_return "---\nsome_key: 'some value'\n"
+
+        expect(reporter.details_extension).to eq('some_key' => 'some value')
+      end
+    end
+  end
+
+  describe '#details_extension_exist?' do
+
+    context 'when there is no ".build_reporter.yml" in the project root' do
+
+      it 'returns false' do
+        expect(reporter.details_extension_exist?).to eq false
+      end
+    end
+
+    context 'when there is a ".build_reporter.yml" in the project root' do
+
+      it 'returns true' do
+        allow(File).to receive(:exist?).with(reporter.reporter_extension_file_path).and_return true
+
+        expect(reporter.details_extension_exist?).to eq true
       end
     end
   end

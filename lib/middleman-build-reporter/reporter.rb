@@ -27,13 +27,27 @@ module Middleman
         "#{@app.build_dir}/#{@app.reporter_file}"
       end
 
+      def reporter_extension_file_path
+        "#{@app.root}/.build_reporter.yml"
+      end
+
       def details
         {
           'branch' => repo.current_branch,
           'revision' => repo.log.first.to_s,
           'build_time' => build_time.to_s,
           'version' => @app.version
-        }
+        }.merge(details_extension)
+      end
+
+      def details_extension
+        return {} if !details_extension_exist?
+
+        YAML.load(File.read(reporter_extension_file_path))
+      end
+
+      def details_extension_exist?
+        File.exist?(reporter_extension_file_path)
       end
 
       def build_time
