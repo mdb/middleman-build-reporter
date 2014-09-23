@@ -1,5 +1,5 @@
-require "middleman-core"
-require "middleman-build-reporter/version"
+require 'middleman-core'
+require 'middleman-build-reporter/version'
 require 'middleman-build-reporter/reporter'
 
 ::Middleman::Extensions.register(:build_reporter) do
