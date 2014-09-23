@@ -1,6 +1,8 @@
 # middleman-build-reporter
 
-Fingerprint your Middleman build with a file reporting build-time details.
+Fingerprint your Middleman build with YAML and/or JSON files reporting build-time details.
+
+middleman-build-reporter helps you understand what code has been deployed to an environment.
 
 ## Output
 
@@ -68,4 +70,47 @@ activate :build_reporter do
   # defaults to ['yaml']
   build.reporter_file = ['json', 'json']
 end
+```
+
+## Reporting additional custom build details
+
+Add any additional build details to a `.build_reporter.yml` file in your project's root.
+
+The `.build_reporter.yml` can be produced as part of your app's build process, or manually managed.
+
+### Example - custom extended details:
+
+The `.build_reporter.yml`:
+
+```
+---
+foo: 'bar'
+```
+
+The output `build/build.yaml`:
+
+```
+branch: master
+revision: 244921c81c9e21a1973659df5f702937b91cfcd4
+build_time: 2014-09-20 10:50:55 -0400
+version: 1.2.3
+foo: bar
+```
+
+### Example - using .build_reporter.yml to override built-in middleman-build-reporter details:
+
+The `.build_reporter.yml`:
+
+```
+---
+revision: 'some_revision'
+```
+
+The output `build/build.yaml`:
+
+```
+branch: master
+revision: some_revision
+build_time: 2014-09-20 10:50:55 -0400
+version: 1.2.3
 ```
