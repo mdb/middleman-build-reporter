@@ -1,6 +1,6 @@
 # middleman-build-reporter
 
-Fingerprint your Middleman build with a file reporting build-time detail.
+Fingerprint your Middleman build with a file reporting build-time details.
 
 ## Output
 
@@ -40,13 +40,13 @@ Install it:
 $ bundle install
 ```
 
-And activate it for basic usage within your `config.rb`:
+Activate it within your `config.rb`:
 
 ```
 activate :build_reporter
 ```
 
-Supported configuration:
+Supported configuration
 
 ```ruby
 activate :build_reporter do
