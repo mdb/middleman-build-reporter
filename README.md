@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/mdb/middleman-build-reporter.svg?branch=master)](https://travis-ci.org/mdb/middleman-build-reporter)
+
 # middleman-build-reporter
 
 Fingerprint your [Middleman](http://middlemanapp.com) build with YAML and/or JSON files reporting build-time details.
