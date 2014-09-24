@@ -1,7 +1,9 @@
 Then /the file "([^"]*)" should report the current branch/ do |file|
-  partial_content = "branch: #{Git.open('.').current_branch}"
+  branch = Git.open('.').current_branch
 
-  check_file_content(file, partial_content, true)
+  prep_for_fs_check do
+    expect(YAML.load(File.read(file))['branch']).to eq branch
+  end
 end
 
 Then /the file "([^"]*)" should report the current git revision/ do |file|
