@@ -9,4 +9,4 @@ end
 
 RSpec::Core::RakeTask.new
 
-task :default => [:spec, :cucumber]
+task default: [:spec, :cucumber]
