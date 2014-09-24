@@ -43,7 +43,7 @@ describe Middleman::BuildReporter::Reporter do
   describe '#reporter_file_path' do
 
     it 'returns the file path to which the build details should be written' do
-      expect(reporter.reporter_file_path).to eq "build/reporter"
+      expect(reporter.reporter_file_path).to eq 'build/reporter'
     end
   end
 
@@ -73,11 +73,11 @@ describe Middleman::BuildReporter::Reporter do
       end
 
       it 'reports the git revision' do
-        expect(details['revision']).to eq "#{git_repo.log.first.to_s}"
+        expect(details['revision']).to eq "#{git_repo.log.first}"
       end
 
       it 'reports the build time' do
-        expect(details['build_time']).to eq "#{Time.now.to_s}"
+        expect(details['build_time']).to eq "#{Time.now}"
       end
 
       it 'reports the app version' do
