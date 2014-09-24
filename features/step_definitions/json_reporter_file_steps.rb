@@ -10,7 +10,7 @@ Then /the JSON file "([^"]*)" should report the current git revision/ do |file|
   prep_for_fs_check do
     json = JSON.parse(File.open(file).read)
 
-    expect(json['revision']).to eq "#{Git.open(gem_root_relative_to_features).log.first.to_s}"
+    expect(json['revision']).to eq "#{Git.open(gem_root_relative_to_features).log.first}"
   end
 end
 

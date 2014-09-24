@@ -41,7 +41,7 @@ module Middleman
       end
 
       def details_extension
-        return {} if !details_extension_exist?
+        return {} unless details_extension_exist?
 
         YAML.load(File.read(reporter_extension_file_path))
       end
