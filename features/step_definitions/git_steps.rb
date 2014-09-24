@@ -7,7 +7,7 @@ Then /the file "([^"]*)" should report the current branch/ do |file|
 end
 
 Then /the file "([^"]*)" should report the current git revision/ do |file|
-  partial_content = "revision: #{Git.open('.').log.first.to_s}"
+  partial_content = "revision: #{Git.open('.').log.first}"
 
   check_file_content(file, partial_content, true)
 end
