@@ -19,14 +19,14 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
   s.require_paths = ['lib']
 
-  s.add_runtime_dependency 'middleman-core'
-  s.add_runtime_dependency 'git'
+  s.add_runtime_dependency 'middleman-core', '>= 3.0.0'
+  s.add_runtime_dependency 'git', '1.2.8'
 
-  s.add_development_dependency 'rspec'
-  s.add_development_dependency 'simplecov'
-  s.add_development_dependency 'timecop'
-  s.add_development_dependency 'cucumber'
-  s.add_development_dependency 'aruba'
-  s.add_development_dependency 'fivemat'
-  s.add_development_dependency 'rake'
+  s.add_development_dependency 'rspec', '3.1.0'
+  s.add_development_dependency 'simplecov', '0.9.0'
+  s.add_development_dependency 'timecop', '0.7.1'
+  s.add_development_dependency 'cucumber', '1.3.17'
+  s.add_development_dependency 'aruba', '0.6.1'
+  s.add_development_dependency 'fivemat', '1.3.1'
+  s.add_development_dependency 'rake', '10.3.2'
 end
