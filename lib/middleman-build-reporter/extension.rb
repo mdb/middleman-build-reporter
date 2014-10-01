@@ -1,5 +1,5 @@
 module Middleman
-  class BuildReporterExtension < Extension
+  class BuildReporterExtension < Middleman::Extension
     option :repo_root, nil, 'repo root'
     option :version, '', 'app version'
     option :reporter_file, 'build', 'build report file name'
