@@ -62,19 +62,14 @@ describe Middleman::BuildReporterExtension do
     end
   end
 
-  describe '#build_report' do
-
-    it 'returns a Middleman::BuildReporter::Reporter instance' do
-      expect(extension.build_report.class).to eq Middleman::BuildReporter::Reporter
-    end
-  end
-
   describe '#after_build' do
 
     let(:builder) { double('builder', say_status: 'fake status') }
 
+    let(:build_report) { double('build_report', write: 'fake_write_result') }
+
     it 'writes the build report to a file' do
-      allow(extension.build_report).to receive(:write).and_return 'fake_write_result'
+      allow(app).to receive(:build_report).and_return build_report
 
       expect(extension.after_build(builder)).to eq 'fake_write_result'
     end

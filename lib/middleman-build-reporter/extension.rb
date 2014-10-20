@@ -14,16 +14,32 @@ module Middleman
       @app.set :version, options.version
       @app.set :reporter_file, options.reporter_file
       @app.set :reporter_file_formats, options.reporter_file_formats
+      @app.set :build_report, build_report
     end
 
     def after_build(builder)
-      build_report.write do |file|
+      @app.build_report.write do |file|
         builder.say_status :create, file, :green
       end
     end
 
+    helpers do
+      class Middleman::Application
+        def build_reporter_fingerprint
+          [
+            '<!--',
+            'FINGERPRINT:',
+            "#{config.build_report.details.to_yaml}",
+            '--!>',
+          ].join("\n")
+        end
+      end
+    end
+
+    private
+
     def build_report
-      @report ||= Middleman::BuildReporter::Reporter.new(@app)
+      Middleman::BuildReporter::Reporter.new(@app)
     end
   end
 end

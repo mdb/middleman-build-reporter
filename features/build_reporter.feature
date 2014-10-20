@@ -1,7 +1,8 @@
 Feature: Build reporter
 
   Scenario: build.yaml should report a branch
-    Given a successfully built app at "basic-app"
+    Given a fixture app "basic-app"
+    And a successfully built app at "basic-app"
     When I cd to "build"
     Then the file "build.yaml" should report the current branch
 
