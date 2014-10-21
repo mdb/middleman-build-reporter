@@ -70,7 +70,7 @@ activate :build_reporter do |build|
   # optional; an array of desired build reporter file formats
   # supported formats: yaml, json
   # defaults to ['yaml']
-  build.reporter_file_formats = ['json', 'json']
+  build.reporter_file_formats = ['yaml', 'json']
 end
 ```
 
