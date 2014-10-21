@@ -2,9 +2,12 @@
 
 # middleman-build-reporter
 
-Fingerprint your [Middleman](http://middlemanapp.com) build with YAML and/or JSON files reporting build-time details.
+middleman-build-reporter helps you understand what code has been deployed to an environment, and whether you're viewing cached or stale build artifacts.
 
-middleman-build-reporter helps you understand what code has been deployed to an environment.
+Features:
+
+1. Generate YAML and/or JSON files reporting build-time/version details for your [Middleman](http://middlemanapp.com) app.
+2. Fingerprint each Middleman HTML template with a `<!-- FINGERPRINT -->` comment surfacing build-time/version details.
 
 ## Output
 
@@ -28,6 +31,19 @@ The `build/build.json`:
   "build_time": "2014-09-20 10:50:55 -0400",
   "version": "1.2.3"
 }
+```
+
+middleman-build-reporter also offers a `build_reporter_fingerprint` helper to fingerprint HTML templates:
+
+```html
+<!--
+FINGERPRINT:
+---
+branch: master
+revision: c786c0addcde128a0823c40ebb4a3ab453411f10
+build_time: '2014-10-21 07:27:51 -0400'
+version: 1.2.3
+--!>
 ```
 
 ## Usage
@@ -74,6 +90,37 @@ activate :build_reporter do |build|
 end
 ```
 
+## Fingerprinting you HTML templates
+
+Use the `build_reporter_fingerprint` to fingerprint your HTML templates with build/version details:
+
+Example usage in `layouts/layout.erb`:
+
+```html
+<body>
+  <h1>Some Site</h1>
+</body>
+
+<%= build_reporter_fingerprint %>
+```
+
+Example fingerprint HTML comment:
+
+```html
+<body>
+  <h1>Some Site</h1>
+</body>
+
+<!--
+FINGERPRINT:
+---
+branch: master
+revision: c786c0addcde128a0823c40ebb4a3ab453411f10
+build_time: '2014-10-21 07:27:51 -0400'
+version: 1.2.3
+--!>
+```
+
 ## Reporting additional custom build details
 
 Add any additional build details to a `.build_reporter.yml` file in your project's root.
@@ -87,6 +134,7 @@ The `.build_reporter.yml`:
 ```
 ---
 foo: 'bar'
+baz: 'bim'
 ```
 
 The output `build/build.yaml`:
@@ -97,15 +145,19 @@ revision: 244921c81c9e21a1973659df5f702937b91cfcd4
 build_time: 2014-09-20 10:50:55 -0400
 version: 1.2.3
 foo: bar
+baz: bim
 ```
 
 ### Example - using .build_reporter.yml to override built-in middleman-build-reporter details:
+
+The `.build_reporter.yml` file can also override the values set by `Middleman::BuildReporter::Reporter`.
 
 The `.build_reporter.yml`:
 
 ```
 ---
 revision: 'some_revision'
+build_time: 'some_other_time'
 ```
 
 The output `build/build.yaml`:
@@ -113,6 +165,6 @@ The output `build/build.yaml`:
 ```
 branch: master
 revision: some_revision
-build_time: 2014-09-20 10:50:55 -0400
+build_time: some_other_time
 version: 1.2.3
 ```
