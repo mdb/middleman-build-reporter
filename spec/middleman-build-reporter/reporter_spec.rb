@@ -6,15 +6,19 @@ describe Middleman::BuildReporter::Reporter do
 
   let(:fake_details) { { 'foo' => 'bar' } }
 
+  let(:options) do
+    double('options', {
+      repo_root: '.',
+      version: '1.2.3',
+      reporter_file: 'reporter_file',
+      reporter_file_formats: ['yaml']
+    })
+  end
+
   let(:app) { middleman_app('basic-app') }
 
   let(:reporter) do
-    app.set :repo_root, '.'
-    app.set :version, '1.2.3'
-    app.set :reporter_file, 'reporter'
-    app.set :reporter_file_formats, ['yaml']
-
-    described_class.new app
+    described_class.new app, options
   end
 
   describe '#new' do
@@ -23,8 +27,8 @@ describe Middleman::BuildReporter::Reporter do
       expect(reporter.app).to eq app
     end
 
-    it 'sets a #repo on the app instance it is passed' do
-      expect(reporter.app.repo.class).to eq Git::Base
+    it 'sets a @repo on the reporter' do
+      expect(reporter.repo.class).to eq Git::Base
     end
   end
 
@@ -32,9 +36,8 @@ describe Middleman::BuildReporter::Reporter do
 
     it 'writes the build details to the proper "build" file' do
       allow(reporter).to receive(:details).and_return fake_details
-      allow(reporter.app).to receive(:reporter_file).and_return 'fake_report_file'
 
-      expect(File).to receive(:write).with('build/fake_report_file.yaml', "---\nfoo: bar\n").and_return 'fake_write_call'
+      expect(File).to receive(:write).with('build/reporter_file.yaml', "---\nfoo: bar\n").and_return 'fake_write_call'
 
       reporter.write
     end
@@ -43,7 +46,7 @@ describe Middleman::BuildReporter::Reporter do
   describe '#reporter_file_path' do
 
     it 'returns the file path to which the build details should be written' do
-      expect(reporter.reporter_file_path).to eq 'build/reporter'
+      expect(reporter.reporter_file_path).to eq 'build/reporter_file'
     end
   end
 
@@ -81,7 +84,7 @@ describe Middleman::BuildReporter::Reporter do
       end
 
       it 'reports the app version' do
-        expect(details['version']).to eq "#{app.version}"
+        expect(details['version']).to eq '1.2.3'
       end
 
       context 'when there is a custom details extension' do
@@ -147,13 +150,6 @@ describe Middleman::BuildReporter::Reporter do
 
         expect(reporter.build_time).to eq 'foo'
       end
-    end
-  end
-
-  describe '#repo' do
-
-    it 'is a shortcut to app#repo' do
-      expect(reporter.repo).to eq app.repo
     end
   end
 

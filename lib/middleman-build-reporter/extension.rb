@@ -9,12 +9,8 @@ module Middleman
       super
 
       @app = app
-
-      @app.set :repo_root, (options.repo_root ? options.repo_root : app.root)
-      @app.set :version, options.version
-      @app.set :reporter_file, options.reporter_file
-      @app.set :reporter_file_formats, options.reporter_file_formats
-      @app.set :build_report, build_report
+      @app.set :repo_root, (options.repo_root ? options.repo_root : @app.root)
+      @app.set :build_report, Middleman::BuildReporter::Reporter.new(@app, options)
     end
 
     def after_build(builder)
@@ -34,12 +30,6 @@ module Middleman
           ].join("\n")
         end
       end
-    end
-
-    private
-
-    def build_report
-      Middleman::BuildReporter::Reporter.new(@app)
     end
   end
 end

@@ -5,16 +5,17 @@ require 'yaml'
 module Middleman
   module BuildReporter
     class Reporter
-      attr_accessor :app
+      attr_accessor :app, :repo
 
-      def initialize(app_instance)
+      def initialize(app_instance, opts = nil)
         @app = app_instance
 
-        @app.set :repo, Git.open(@app.repo_root)
+        @options = opts
+        @repo = Git.open(opts.repo_root)
       end
 
       def write
-        @app.reporter_file_formats.each do |format|
+        @options.reporter_file_formats.each do |format|
           file = "#{reporter_file_path}.#{format}"
 
           File.write(file, serialize(format))
@@ -24,7 +25,7 @@ module Middleman
       end
 
       def reporter_file_path
-        "#{@app.build_dir}/#{@app.reporter_file}"
+        "#{@app.build_dir}/#{@options.reporter_file}"
       end
 
       def reporter_extension_file_path
@@ -33,10 +34,10 @@ module Middleman
 
       def details
         {
-          'branch' => repo.current_branch,
-          'revision' => repo.log.first.to_s,
+          'branch' => @repo.current_branch,
+          'revision' => @repo.log.first.to_s,
           'build_time' => build_time.to_s,
-          'version' => @app.version
+          'version' => @options.version
         }.merge(details_extension)
       end
 
@@ -52,10 +53,6 @@ module Middleman
 
       def build_time
         @build_time ||= Time.now
-      end
-
-      def repo
-        @app.repo
       end
 
       def serialize(format)
