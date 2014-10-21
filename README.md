@@ -2,11 +2,11 @@
 
 # middleman-build-reporter
 
-middleman-build-reporter helps you understand what code has been deployed to an environment, and whether you're viewing cached or stale build artifacts.
+middleman-build-reporter is a [Middleman](http://middlemanapp.com) to help you understand what code has been deployed to an environment, and whether you're viewing cached or stale build artifacts.
 
 Features:
 
-1. Generate YAML and/or JSON files reporting build-time/version details for your [Middleman](http://middlemanapp.com) app.
+1. Generate YAML and/or JSON files reporting build-time/version details for your Middleman app.
 2. Fingerprint each Middleman HTML template with a `<!-- FINGERPRINT -->` comment surfacing build-time/version details.
 
 ## Output
