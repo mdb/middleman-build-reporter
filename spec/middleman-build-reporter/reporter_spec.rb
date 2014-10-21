@@ -143,14 +143,6 @@ describe Middleman::BuildReporter::Reporter do
     it 'reports the current time' do
       expect(reporter.build_time.strftime('%Y-%m-%d %H:%M')).to eq Time.now.strftime('%Y-%m-%d %H:%M')
     end
-
-    context 'when build time is already set' do
-      it 'returns the existing value' do
-        reporter.instance_variable_set('@build_time', 'foo')
-
-        expect(reporter.build_time).to eq 'foo'
-      end
-    end
   end
 
   describe '#serialize' do

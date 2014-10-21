@@ -52,7 +52,7 @@ module Middleman
       end
 
       def build_time
-        @build_time ||= Time.now
+        Time.now
       end
 
       def serialize(format)
