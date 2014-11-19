@@ -90,7 +90,7 @@ activate :build_reporter do |build|
 end
 ```
 
-## Fingerprinting you HTML templates
+## Fingerprinting your HTML templates
 
 Use the `build_reporter_fingerprint` to fingerprint your HTML templates with build/version details:
 
