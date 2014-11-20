@@ -9,7 +9,6 @@ module Middleman
       super
 
       @app = app
-      @app.set :repo_root, (options.repo_root ? options.repo_root : @app.root)
       @app.set :build_report, Middleman::BuildReporter::Reporter.new(@app, options)
     end
 

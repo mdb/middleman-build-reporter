@@ -11,7 +11,7 @@ module Middleman
         @app = app_instance
 
         @options = opts
-        @repo = Git.open(opts.repo_root)
+        @repo = Git.open(opts.repo_root ? opts.repo_root : @app.root)
       end
 
       def write
