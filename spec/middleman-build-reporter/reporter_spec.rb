@@ -2,6 +2,11 @@ require 'spec_helper'
 
 describe Middleman::BuildReporter::Reporter do
 
+  subject(:reporter) do
+    described_class.new app, options
+  end
+
+
   let(:git_repo) { Git.open('.') }
 
   let(:fake_details) { { 'foo' => 'bar' } }
@@ -16,10 +21,6 @@ describe Middleman::BuildReporter::Reporter do
   end
 
   let(:app) { middleman_app('basic-app') }
-
-  let(:reporter) do
-    described_class.new app, options
-  end
 
   describe '#new' do
 
