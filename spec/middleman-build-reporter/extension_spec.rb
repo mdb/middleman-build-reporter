@@ -1,9 +1,10 @@
 require 'spec_helper'
 
 describe Middleman::BuildReporterExtension do
-  let(:app) { middleman_app('basic-app') }
 
-  let(:extension) { described_class.new(app) }
+  subject(:extension) { described_class.new(app) }
+
+  let(:app) { middleman_app('basic-app') }
 
   context 'its default options' do
 
