@@ -1,5 +1,4 @@
 require 'bundler/setup'
-require 'git'
 
 Bundler.require(:development)
 
