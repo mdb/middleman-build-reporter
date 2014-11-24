@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/mdb/middleman-build-reporter.svg?branch=master)](https://travis-ci.org/mdb/middleman-build-reporter)
+[![Code Climate](https://codeclimate.com/github/mdb/middleman-build-reporter/badges/gpa.svg)](https://codeclimate.com/github/mdb/middleman-build-reporter)
 
 # middleman-build-reporter
 
