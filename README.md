@@ -41,7 +41,7 @@ The `build/build.json`:
 
 middleman-build-reporter also offers a `build_reporter_fingerprint` helper to fingerprint HTML templates:
 
-```html
+```
 <!--
 FINGERPRINT:
 ---
