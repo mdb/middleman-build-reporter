@@ -3,7 +3,7 @@
 
 # middleman-build-reporter
 
-middleman-build-reporter is a [Middleman](http://middlemanapp.com) to help you understand what code has been deployed to an environment, and whether you're viewing cached or stale build artifacts.
+middleman-build-reporter is a [Middleman](http://middlemanapp.com) extension to help you understand what code has been deployed to an environment, and whether you're viewing cached or stale build artifacts.
 
 Features:
 
