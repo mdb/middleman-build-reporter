@@ -6,7 +6,6 @@ describe Middleman::BuildReporter::Reporter do
     described_class.new app, options
   end
 
-
   let(:git_repo) { Git.open('.') }
 
   let(:fake_details) { { 'foo' => 'bar' } }
@@ -28,8 +27,18 @@ describe Middleman::BuildReporter::Reporter do
       expect(reporter.app).to eq app
     end
 
-    it 'sets a @repo on the reporter' do
-      expect(reporter.repo.class).to eq Git::Base
+    it 'sets the repo root' do
+      expect(reporter.repo.dir.path).to eq(Dir.pwd)
+    end
+
+    context 'when a repo root is not specified' do
+      let(:options) do
+        double('options', { repo_root: nil })
+      end
+
+      it 'sets repo root to the current directory' do
+        expect(reporter.repo.dir.path).to eq(Dir.pwd)
+      end
     end
   end
 
