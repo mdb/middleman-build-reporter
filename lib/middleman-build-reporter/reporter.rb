@@ -5,7 +5,7 @@ require 'yaml'
 module Middleman
   module BuildReporter
     class Reporter
-      attr_accessor :app, :repo
+      attr_reader :app, :options, :repo
 
       def initialize(app_instance, opts = nil)
         @app = app_instance
@@ -25,19 +25,19 @@ module Middleman
       end
 
       def reporter_file_path
-        "#{@app.build_dir}/#{@options.reporter_file}"
+        "#{app.build_dir}/#{options.reporter_file}"
       end
 
       def reporter_extension_file_path
-        "#{@app.root}/.build_reporter.yml"
+        "#{app.root}/.build_reporter.yml"
       end
 
       def details
         {
-          'branch' => @repo.current_branch,
-          'revision' => @repo.log.first.to_s,
+          'branch' => repo.current_branch,
+          'revision' => repo.log.first.to_s,
           'build_time' => build_time.to_s,
-          'version' => @options.version
+          'version' => options.version
         }.merge(details_extension)
       end
 
