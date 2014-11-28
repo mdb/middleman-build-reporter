@@ -36,8 +36,8 @@ describe Middleman::BuildReporter::Reporter do
         double('options', { repo_root: nil })
       end
 
-      it 'sets repo root to the current directory' do
-        expect(reporter.repo.dir.path).to eq(Dir.pwd)
+      it 'sets the repo root to the app root' do
+        expect(reporter.repo.dir.path).to eq(app.root)
       end
     end
   end
