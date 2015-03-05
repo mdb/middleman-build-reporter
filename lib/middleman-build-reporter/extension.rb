@@ -25,7 +25,7 @@ module Middleman
             '<!--',
             'FINGERPRINT:',
             "#{config.build_report.details.to_yaml}",
-            '--!>',
+            '-->',
           ].join("\n")
         end
       end
