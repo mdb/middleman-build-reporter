@@ -124,7 +124,7 @@ branch: master
 revision: c786c0addcde128a0823c40ebb4a3ab453411f10
 build_time: '2014-10-21 07:27:51 -0400'
 version: 1.2.3
---!>
+-->
 ```
 
 ## Reporting additional custom build details
