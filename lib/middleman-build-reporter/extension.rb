@@ -13,8 +13,9 @@ module Middleman
     end
 
     def after_build(builder)
-        builder.say_status :create, file, :green
       @app.config[:build_report].write do |file|
+        # look into trigger
+        builder.thor.say_status :create, file, :green
       end
     end
 
