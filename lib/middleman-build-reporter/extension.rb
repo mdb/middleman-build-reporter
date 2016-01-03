@@ -9,7 +9,7 @@ module Middleman
       super
 
       @app = app
-      @app.set :build_report, Middleman::BuildReporter::Reporter.new(@app, options)
+      @app.config[:build_report] = Middleman::BuildReporter::Reporter.new(@app, options)
     end
 
     def after_build(builder)
