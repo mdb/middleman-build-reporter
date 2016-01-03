@@ -26,7 +26,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'simplecov', '0.9.0'
   s.add_development_dependency 'timecop', '0.7.1'
   s.add_development_dependency 'cucumber', '1.3.17'
-  s.add_development_dependency 'aruba', '0.6.1'
+  s.add_development_dependency 'aruba'
   s.add_development_dependency 'fivemat', '1.3.1'
   s.add_development_dependency 'rake', '10.3.2'
+  s.add_development_dependency 'middleman'
 end
