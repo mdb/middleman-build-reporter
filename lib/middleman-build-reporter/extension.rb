@@ -13,8 +13,8 @@ module Middleman
     end
 
     def after_build(builder)
-      @app.build_report.write do |file|
         builder.say_status :create, file, :green
+      @app.config[:build_report].write do |file|
       end
     end
 
