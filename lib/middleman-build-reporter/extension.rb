@@ -20,15 +20,13 @@ module Middleman
     end
 
     helpers do
-      class Middleman::Application
-        def build_reporter_fingerprint
-          [
-            '<!--',
-            'FINGERPRINT:',
-            "#{config.build_report.details.to_yaml}",
-            '-->',
-          ].join("\n")
-        end
+      def build_reporter_fingerprint
+        [
+          '<!--',
+          'FINGERPRINT:',
+          "#{config.build_report.details.to_yaml}",
+          '-->',
+        ].join("\n")
       end
     end
   end
