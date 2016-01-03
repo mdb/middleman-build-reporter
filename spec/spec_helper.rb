@@ -26,7 +26,7 @@ def middleman_app(fixture_path)
     set :show_exceptions, false
   }
 
-  Middleman::Application.server.inst do
+  Middleman::Application.new do
     initialize_commands.each do |p|
       instance_exec(&p)
     end
