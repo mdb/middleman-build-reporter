@@ -9,25 +9,24 @@ module Middleman
       super
 
       @app = app
-      @app.set :build_report, Middleman::BuildReporter::Reporter.new(@app, options)
+      @app.config[:build_report] = Middleman::BuildReporter::Reporter.new(@app, options)
     end
 
     def after_build(builder)
-      @app.build_report.write do |file|
-        builder.say_status :create, file, :green
+      @app.config[:build_report].write do |file|
+        # look into trigger
+        builder.thor.say_status :create, file, :green
       end
     end
 
     helpers do
-      class Middleman::Application
-        def build_reporter_fingerprint
-          [
-            '<!--',
-            'FINGERPRINT:',
-            "#{config.build_report.details.to_yaml}",
-            '-->',
-          ].join("\n")
-        end
+      def build_reporter_fingerprint
+        [
+          '<!--',
+          'FINGERPRINT:',
+          "#{config.build_report.details.to_yaml}",
+          '-->',
+        ].join("\n")
       end
     end
   end

@@ -25,7 +25,7 @@ module Middleman
       end
 
       def reporter_file_path
-        "#{app.build_dir}/#{options.reporter_file}"
+        "#{app.config[:build_dir]}/#{options.reporter_file}"
       end
 
       def reporter_extension_file_path

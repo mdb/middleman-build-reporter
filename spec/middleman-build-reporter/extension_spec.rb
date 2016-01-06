@@ -65,12 +65,16 @@ describe Middleman::BuildReporterExtension do
 
   describe '#after_build' do
 
-    let(:builder) { double('builder', say_status: 'fake status') }
+    let(:thor) { double('thor', say_status: 'fake status') }
+
+    let(:builder) { double('builder', thor: thor) }
 
     let(:build_report) { double('build_report', write: 'fake_write_result') }
 
+    let(:config) { { build_report: build_report }  }
+
     it 'writes the build report to a file' do
-      allow(app).to receive(:build_report).and_return build_report
+      allow(extension.app).to receive(:config).and_return config
 
       expect(extension.after_build(builder)).to eq 'fake_write_result'
     end
